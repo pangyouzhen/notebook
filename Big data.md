@@ -5,6 +5,13 @@
 
 # Hadoop
 
+- hadoop 的节点主要有
+  - namenode，负责协调集群中数据存储，（这些数据存储到哪些地方了，去哪地方找，所以是协调）
+  - dataname，存储被切分的数据块，（存储具体的数据）
+  - jobtracker，协调数据计算任务
+  - tacktracker，负责执行jobtracker指派的任务
+  - secondarynamenode，帮助namenode收集文件系统运行的状态信息
+
 # HDFS
 
 # Hbase
