@@ -275,8 +275,7 @@
 
 ## 常见错误的解决
 
-- sudo apt-get  install 
-- ​
+- sudo apt-get  install
 
 ## linux启动
 
@@ -321,6 +320,7 @@ mongo普通查询
 - git add .
 - git commit -m "自己的标注"
 - git push origin master
+- git log
 
 # chrome & google 搜索技巧
 
@@ -363,11 +363,3 @@ vimium应该是基于 vim的思想进行编写的，所以许多命令是通用�
 - hosts文件修改
 - lantern，xx-net
 - 镜像网站
-
-# VirutalBox
-
-|        | NAT  | Bridged | Host-only |
-| ------ | ---- | ------- | --------- |
-| 主机->虚机 | OK   | OK      | x         |
-| 虚机->主机 | x    | OK      | x         |
-| 虚拟机之间  | x    | OK      | x         |

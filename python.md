@@ -75,7 +75,7 @@ Fib  function
 
 ```python
 def fib(n):
-	if n < 2: return 1
+  	if n < 2: return 1
     return fib(n-1) + fib(n-2)
 ```
 
@@ -93,9 +93,9 @@ def decorator(func):
     	return cahce[args]
      return wrapper
   
-  @decorator
-  def fib(n):
-    if n < 2: return 1
+@decorator
+def fib(n):
+  	if n < 2: return 1
     return fib(n-1) + fib(n-2)
 ```
 
@@ -109,7 +109,7 @@ def decorator(func):
 
 ### Higher-order function
 
-- map, filter ( recommend to use list comprehension)
+- map, filter ( *recommend to use list comprehension*)
 - reduce
 - sorted（notice the parameter *key*  like *min* function）
 
