@@ -8,6 +8,12 @@
 
 ## 模型评估和模型选择
 
+### 模型评估与模型选择
+
+### 过拟合和模型选择
+
+![img](http://images.cnitblog.com/blog/663864/201411/081949392689088.png)
+
 ## 正则化与交叉验证
 
 ### 正则化
@@ -20,8 +26,6 @@
 ## 泛化能力
 
 Error = bias + variance + noise
-
-![image](http://images.cnitblog.com/blog/663864/201411/081949392689088.png)
 
 模型搞得复杂，参数多，才能低偏差，模型简单，参数少，才能低方差，
 
@@ -41,12 +45,18 @@ http://www.cnblogs.com/jianxinzhou/p/4083921.html
 
 ## 分类问题
 
-### 二类分类问题的常见评价指标
+评价分类器性能的指标一般是分类准确率（accuracy），就是正确分类的样本数占总样本数之比。
+对于二分类问题：常用的是精确率（precision）和召回率（recall），所分类的情况有四类：将正类判定为正类（TP， true  positive），N（FN，False negative），将负类判定为负类（TN），将负类判定为正类。（FN）。
 
-- 准确率（accuracy）
-- 精确率（precision）
-- 召回率（recall）：
-- F1值：是准确率与召回率的调和均值
+精确率定义:就是占所有预测结果中正分类数的比例
+
+$$P=\frac{TP}{TP+FP}$$
+
+召回率定义:就是占本来是正分类数的比例
+
+$$R=\frac{TP}{TP+FN}$$
+
+F1值：是准确率与召回率的调和均值
 
 ## 标注问题
 
