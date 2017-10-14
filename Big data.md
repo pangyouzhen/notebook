@@ -1,6 +1,6 @@
 # 概述
 
-- 核心：分布式存储和分布式处理（Mapreduce）
+- 核心：分布式存储（HDFS）和分布式处理（Mapreduce）
 - 和云计算的关系：Iaas  (infrastructure) , Paas (platform) , Saas (software), 云计算的关键技术, 虚拟化，分布式存储，分布式计算， 多租户
 
 # Hadoop
@@ -25,15 +25,23 @@
 ### 名称节点和数据节点
 
 在HDFS中，名称节点（Namenode）负责管理命名空间（namespace）保存了两个核心的数据结构
-
 - FsImage: 维护文件系统树和文件树中的所有文件和文件夹的metadata
 - EditLog:记录了所有针对文件的创建删除重命名等操作
 
 hadoop启动时将fsimage和editlog进行合并，因为fsimage比较小，所以把fsimage独立出来
+secondaryNamenode ，并解决editlog不断增大的问题
 
-secondaryNamenode 冷备份，并解决editlog不断增大的问题
+## HDFS存储原理
 
+- 增强容错性和可用性，解决方案：多副本保存，数据冗余来解决，一般默认为3个副本
+- 数据存储：
+  - 1副本：上传文件的数据节点
+  - 2副本：与1副本不同机架的节点上
+  - 3副本：与1副本相同机架的不同节点
 
+## HDFS常用命令
+
+- 常用命令是hadoop  fs
 
 # Hbase
 
