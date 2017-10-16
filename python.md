@@ -299,6 +299,10 @@ other
 
 - 将页面拉至最底部：driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
+## 扩展js
+
+
+
 ## 验证码和图像识别
 
 ## 常用工具 
