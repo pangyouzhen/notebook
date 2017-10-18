@@ -65,15 +65,107 @@ secondaryNamenode ，并解决editlog不断增大的问题
 
 概念视图和物理视图
 
-
-
 # Nosql
+
+## NoSQL的四大类型
+
+### 键值存储：redis
+
+- 应用场景：频繁读写,拥有简单模型,内容缓存，一般作为缓冲层
+
+### 文档数据库： Mongodb
+
+- 存储对象类型：json，xml，lxml
+
+### 图数据库：Neo4j
+
+- 典型应用：社交网络，模式识别，依赖分析，推荐系统
+
+### 列族数据库：Hbase
+
+- 优点：查找速度快，可扩展性强，容易进行分布式扩展，复杂度低
+
+### 不同类型数据库的比较
+
+## CAP
+
+- C 一致性
+- A可用性
+- P分析容忍性
+- MYSQL等关系型数据CA，NOSQL一般强调CP
+
+## mongodb的使用
+
+- 创建：不用创建表
+- 插入：db.coll.insert({'a':1})
 
 # 云数据库
 
 # Mapreduce
 
 # Hive
+
+## 概述
+
+
+
+## hive
+
+## hive 常见命令
+
+- 更新数据：update 表名 set 列名=更新值 where 更新条件
+- 删除
+
+  - 删除数据：delete [from] 表名 [where 删除条件]
+  - 删除表数据但是保留表的定义：truncate table 表名;
+  - 删除表数据和表：drop table 表名;
+- 查询：
+
+  - 普通查询：select * from 表名 where 查询条件 order by 排序名
+  - 限制行数：select top 5 * from student where sex='男';
+  - 按百分数返回行: select top 20 percent sname,saddress from students
+  - 查询某一列内容为空的记录：select sname as name from stu where address is null
+- 模糊查询：
+
+  - like:  select * from stu where sname like "张%"
+  - between: select * from stu where grade between 60 and 80
+  - in: select * from stu where address in ("GZ","SH")
+  - 通配符：-  匹配一个字符，%匹配任意长度的字符，[] 括号里指定范围的一个字符，[^] 匹配不在括号里一个字符
+- 聚合函数：
+
+  - SUM()函数
+  - AVG()函数
+  - MAX()函数
+  - MIN()函数
+  - COUNT(*)函数
+- 时间日期：
+  - select from_unixtime(1323308,'')????
+  - year，month， day
+  - month_between(date1,date2): 返回date1和date2 之间相差的月份
+  - datediff：使用datediff函数返回两个日期之间的天数
+- 分组查询
+  - 分组查询语句：select * from 表名 where .. group by ...having
+- 连接查询
+  - inner join ... on ...: 两个表中都要满足
+  - full join: 把左右两个表中的数据都取出来，不管是否匹配
+- 查询数据高级函数
+  - cast： 数据类型的转换. select cast('12' as int ) from stu; 
+  - with ties:  select top 10 with ties price from stu;  这样可能不止取第10行，因为若是11行，12行都与10的值相同的话也会取得到
+  - with cube：这个参数会自动对group by 所列的分组列做加和计算？？
+  - with roolup：只会根据group by子列所列的第一列做加总计算？？
+  - union 合并多个查询结果。将多个查询结果做上下垂直合并，所以列数不会增加
+- 字符串函数
+  - length：字符串长度函数
+  - reverse：字符串反转函数
+  - concat：字符串连接函数
+  - concat_ws: 带分隔符的字符串连接函数
+  - substr：截取字符串
+- 条件函数
+  - case a when b then c when d then e else f end;  当a=b 时，返回c，否则返回f
+- 子查询
+- 数学函数
+  - round函数：返回四舍五入的值
+  - floor：向下取整。ceil： 向上取整
 
 # Spark
 
