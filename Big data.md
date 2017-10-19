@@ -107,7 +107,9 @@ secondaryNamenode ，并解决editlog不断增大的问题
 
 ## 概述
 
-
+数据仓库：用于支持管理和决策
+数据集市：
+pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时时数据分析
 
 ## hive
 
@@ -145,6 +147,7 @@ secondaryNamenode ，并解决editlog不断增大的问题
   - datediff：使用datediff函数返回两个日期之间的天数
 - 分组查询
   - 分组查询语句：select * from 表名 where .. group by ...having
+  - SELECT *,Row_Number() OVER (partition by deptid ORDER BY salary desc) rank from employee; 对于每部分进行分区
 - 连接查询
   - inner join ... on ...: 两个表中都要满足
   - full join: 把左右两个表中的数据都取出来，不管是否匹配
@@ -168,6 +171,31 @@ secondaryNamenode ，并解决editlog不断增大的问题
   - floor：向下取整。ceil： 向上取整
 
 # Spark
+
+## 简介
+
+- spark是将结果放在内存中,hadoop使用磁盘
+- spark基于DAG进行迭代计算，RDD形成的任务成DAG
+- spark四大组件：spark streaming，spark SQL，spark Mllib，spark graphx。
+
+## spark 运行流程
+
+### 基本概念
+
+- RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型
+- Executor：是运行在工作节点（workernode）的一个进程，负责运行task
+- task：运行在Executor上的工作单元
+- Job：一个Job 包含多个RDD及作用于相应RDD上的各种操作。
+- Stage：是Job的基本调度单位，一个Job分组为多组的Task，每组Task被称为stage，没有Shuffle关系
+- 一个Application 由一个Driver和若干个Job组成，一个Job由多个Stage组成，一个Stage由多个没有Shuffle关系的Task组成
+
+### RDD运行原理
+
+
+
+## Spark SQL
+
+
 
 # 流计算
 

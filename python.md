@@ -268,9 +268,7 @@ other
 
 ## DIY 爬虫和框架
 - DIY爬虫的缺点
-    - 使用数据库不是很多（爬虫的网址和数据的存储）
     - 不具有高扩展性（是根据网站，而不是流程来的）
-    - 爬虫网站的问题在于未有效存储错误url
     - 稳定性不高
 - 优点
     - 轻，有效利用pandas
@@ -297,11 +295,23 @@ other
 
 ## 采集javascript
 
+采集js的几种方法
+
+- 模拟浏览器：phantomjs，pyv8等等工具，效率低，不适合大规模的爬取
+- 更换爬取的网址，移动端或者app或者google 缓存等等、
+- 解析js源码：较为困难
+
+### 模拟浏览器
+
 - 将页面拉至最底部：driver.execute_script('window.scrollTo(0,document.body.scrollHeight)')
 
-## 扩展js
+### 解析js源码
 
-
+- request_url中有一个token的参数或者其他的参数
+- 找到参数，使用ctrl+shift+F进行全局搜索这个参数，找到相应的js文件
+- 文件进行断点调试？？找到生成该参数的具体js代码??实际中如何更好的设置断点
+- 解析js代码，并将js代码转化为python
+- [js实例](http://wenqiang-china.github.io/2016/05/11/get-ctrip-flights-info-2/)
 
 ## 验证码和图像识别
 
@@ -310,6 +320,13 @@ other
 ### chrome
 
 [chrome 开发者工具](http://wiki.jikexueyuan.com/project/chrome-devtools/debugging-javascript.html)
+
+常用的插件
+
+- infolite
+- xpath helper
+- cookie edit
+- js beautiful
 
 ## 其他知识
 
@@ -362,19 +379,6 @@ other
 ## 魔术方法
 ```
 
-
-
-
-    Available line magics:
-    %alias  %alias_magic  %autocall  %automagic  %autosave  %bookmark  %cd  %clear  %cls  %colors  %config  %connect_info  %copy  %ddir  %debug  %dhist  %dirs  %doctest_mode  %echo  %ed  %edit  %env  %gui  %hist  %history  %killbgscripts  %ldir  %less  %load  %load_ext  %loadpy  %logoff  %logon  %logstart  %logstate  %logstop  %ls  %lsmagic  %macro  %magic  %matplotlib  %mkdir  %more  %notebook  %page  %pastebin  %pdb  %pdef  %pdoc  %pfile  %pinfo  %pinfo2  %popd  %pprint  %precision  %profile  %prun  %psearch  %psource  %pushd  %pwd  %pycat  %pylab  %qtconsole  %quickref  %recall  %rehashx  %reload_ext  %ren  %rep  %rerun  %reset  %reset_selective  %rmdir  %run  %save  %sc  %set_env  %store  %sx  %system  %tb  %time  %timeit  %unalias  %unload_ext  %who  %who_ls  %whos  %xdel  %xmode
-    
-    Available cell magics:
-    %%!  %%HTML  %%SVG  %%bash  %%capture  %%cmd  %%debug  %%file  %%html  %%javascript  %%js  %%latex  %%perl  %%prun  %%pypy  %%python  %%python2  %%python3  %%ruby  %%script  %%sh  %%svg  %%sx  %%system  %%time  %%timeit  %%writefile
-    
-    Automagic is ON, % prefix IS NOT needed for line magics.
-
-
-
 注：几个问题
 - nbextensions 的navigation hot_keys后，使用esc可能受到限制
 - nbextensions 中的tables of content 不能够折叠
@@ -383,15 +387,6 @@ other
 ## pycharm
 
 ### Pycharm  专业版激活
-
-
-（注意个人pc端使用破解软件是可以的，但是对于正式工作以后，先确定公司是否购买了这一类的软件，如果没有进行购买，不要使用破解软件，以免对个人，公司产生不必要的麻烦）
-- license server 进行激活,可用的 License sever address
-    - http://xidea.online
-    - http://idea.shaofan.org
-    - http://shaofan.org:8080
-    - http://23.105.214.239:10001
-    - http://idea.liyang.io
 
 ### python 解释器
 
