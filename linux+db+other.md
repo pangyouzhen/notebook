@@ -357,7 +357,7 @@ vimium应该是基于 vim的思想进行编写的，所以许多命令是通用�
 - 使用关键字site，filetype，" "
 - 页面进行查找ctrl+F
 
-# 科学上网
+# 上网
 
 - [ss搭建](https://www.rkdot.com/shadowsocks-server-setup/)，购买，服务器和本地配置
 - hosts文件修改
