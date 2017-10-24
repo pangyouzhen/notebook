@@ -1,42 +1,31 @@
-# stanford NLP
-
 [网址链接](http://52opencourse.com/70/%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%80%E8%AF%BE-%E5%BC%95%E8%A8%80%EF%BC%88introduction%EF%BC%89)
 
-## 引言（什么是NLP）
-### NLP主要难点问题 -- 歧义
-### 常用模型
-- 统计模型（主流）（下文介绍统计模型）
-- 语言模型
+# 引言（什么是NLP）
+- NLP难点—歧义
+- 常用模型：基于规则（我有一个手机:名词+动词+名词），基于统计(根据词前后出现的概率)
 
-## 文本处理基础
-### 正则表达式（略）
-### 分词
-#### 词典
-- 文本语料库的元素
-    - type： 词典的元素，独立词条
-    - token：独立词条在文本中每次出现的次数
+# 文本处理基础
+## 正则表达式（略）
+## 分词
 
-#### 分词算法
+- 分词算法三种：基于规则（词库），基于统计（概率），基于理解
+- 分词的词典：一个是词典的元素和词频
 
-- 基于机械的分词方法（只有词库）
-- 基于统计的分词方法（结巴分词）
-- 基于理解的分词方法（人）
-
-#### 分词难点
+### 分词难点
 - 切分歧义：中文书面语占比不大
 - 未登录词：常见的方法有互信息，语言模型，基于最大熵或隐形马尔科夫模型的统计分类
 
-#### 结巴分词的原理
+### 结巴分词的原理
 
-最大概率法。使用了大规模语料库+HMM模型
+基于统计的方法。最大概率法。使用了大规模语料库+HMM模型
 
 - 已登录词。就是词库进行搜索。如何实现高效的搜索。第一个就是词库的存储了，高效的存储，第二个就是如何进行切分，遇到歧义的词如何进行切分，比如中国人，是中国 人？还是中国人
 - 未登录词。HMM模型，使用了维特比算法。
 
-### 文本归一化
+## 文本归一化
 大小写转换，词干提取，繁简互换（）
 
-### 断句
+## 断句
 句子分为大句和小句，大句子一般由“！”，“。”，“；”，“\“”、“？”等分割，小句一般由“，”分割，起停顿作用，需要上下文搭配表达特定的语义。
 
 # 最小编辑距离（MED）
@@ -66,8 +55,6 @@ linux 下的diff命令就是利用最小编辑距离进行比较的
 - 如何利用动态规划求解最小编辑距离
 
 
-
-
 ### 变形
 就是如何改进最小编辑距离
 
@@ -75,7 +62,7 @@ linux 下的diff命令就是利用最小编辑距离进行比较的
 [网址链接](http://52opencourse.com/96/%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%AC%AC%E4%B8%89%E8%AF%BE-%E6%9C%80%E5%B0%8F%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%EF%BC%88minimum-edit-distance%EF%BC%89)
 
 # 语言模型
-### N-gram介绍
+## N-gram介绍
 **如何计算一个句子出现的概率。**
 $$p(S) = p(w_{1},w_{2},...,w_{n})= p(w_{1})p(w_{2}|p_w{1})p(w_{3}|w_{1},w_{2})...$$
 基于马尔科夫(Markov Assumption)；下一个词的出现仅依赖于它前面的一个或者几个词
@@ -123,83 +110,97 @@ $$p(S)=p(w_{1})p(w_{2}|w_{1})P(w_{3}|w_{1},w_{2})...=p(w_{1})p(w_{2}|w_{1})p(w_{
 
 利用低元n-grams模型对高元n-grams进行线性插值
 具体步骤如下
-    - 首先，确定training data，held-out data,test-data
-    - 然后，根据training data 构造初始的语言模型，并确定初始的 $\lambda*s$
-    - 根据EM算法迭代地优化，使得held-out data 概率最大化
+- 首先，确定training data，held-out data,test-data
+- 然后，根据training data 构造初始的语言模型，并确定初始的 $\lambda*s$
+- 根据EM算法迭代地优化，使得held-out data 概率最大化
 - Kneser-Ney Smoothing
 - Web-scale LMS
 
 ### 语言模型的变种
 
 - Class-based N-gram Model
+
 - Topic-based N-gram Model
 
     该方法将训练集划分为多个子集，并对每个子集分别建立N-grams语言模型，以解决模型的主题自适应问题
 
 - Cache-based N-grams Model
   可能是智能拼音的用法
+
 - Skipping N-gram Model & Trigger-based N-gram Model
   二者的核心思想都是刻画距离的约束关系
+
 - 指数语言模型：最大熵模型MaxEnt、最大熵马尔科夫模型MEMM，条件随机域模型CRF
 
 
+## WordEMbedding （词嵌入模型）
+
+### 语言的表示
+
+- 符号主义：词袋模型，one-hoting编码 例如:   苹果[1, 0, 0]  梨子[0,1,0]，数据稀疏，不能反映词语之间的联系
+- 分布式表示：wordembedding，纬度低, 例如：苹果 [0.1, 0.2, 0.3] ,梨子 [0.2, 0.1, 0.3] 
+
+### wordEmbedding
+
+gensim库的使用
+
 ## 拼写检查
 ### 任务定义
-    拼写纠错一般可以分为两个子任务
+拼写纠错一般可以分为两个子任务
 
-    - Spelling Error Detection: 按照错误的类型不同，分为Non-word Errors和Real-word Errors
-    - spelling Error correction: 自动纠错，将hte-the
+- Spelling Error Detection: 按照错误的类型不同，分为Non-word Errors和Real-word Errors
+- spelling Error correction: 自动纠错，将hte-the
 ### Non-word Errors
-    将单词拼写为词典中并不存在的词 mean -> menn
+将单词拼写为词典中并不存在的词 mean -> menn
 
-    - 发现：任何不存在词典中的词都被视为错误，准确率依赖于词典的规模和质量
-    - 纠正：查找词典中最为相近的词常见的方法有：Shorttest weight edit distance 和 Highest noisy channel probility
+- 发现：任何不存在词典中的词都被视为错误，准确率依赖于词典的规模和质量
+- 纠正：查找词典中最为相近的词常见的方法有：Shorttest weight edit distance 和 Highest noisy channel probility
 ### Real-word Errors:
-    将单词拼写为其他单词 there -> three
+将单词拼写为其他单词 there -> three
 
-    - 发现：每个word都作为拼写错误的候选
-    - 纠正：从发音和拼写的角度，查找与word最相近的词的集合，常见方法有highest noisy channel probility和classifier
+- 发现：每个word都作为拼写错误的候选
+- 纠正：从发音和拼写的角度，查找与word最相近的词的集合，常见方法有highest noisy channel probility和classifier
 ### 基于Noisy channel Model的拼写纠错
 
-    Noisy channel Model即噪声信道模型，或称信源信道模型，普遍用于语音识别，拼写纠错，机器翻译，中文分词，词性标注，音字转换
+Noisy channel Model即噪声信道模型，或称信源信道模型，普遍用于语音识别，拼写纠错，机器翻译，中文分词，词性标注，音字转换
 
 [链接](http://52opencourse.com/138/%E6%96%AF%E5%9D%A6%E7%A6%8F%E5%A4%A7%E5%AD%A6%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%AC%AC%E4%BA%94%E8%AF%BE-%E6%8B%BC%E5%86%99%E7%BA%A0%E9%94%99%EF%BC%88spelling-correction%EF%BC%89)
 
-    noisy word(spelling error)被看作是original word(用x表示)通过noisy channel转换得到的，现在已知noisy word，如何求的最大可能的original word(用w表示)，公式如下：
-    P(w)为先验概率，P(x|w)为转移概率，二者可以基于训练语料库的建立语言模型和转移矩阵(又称为 error Model，channel Model)得到，具体例子查看链接
+noisy word(spelling error)被看作是original word(用x表示)通过noisy channel转换得到的，现在已知noisy word，如何求的最大可能的original word(用w表示)，公式如下：
+P(w)为先验概率，P(x|w)为转移概率，二者可以基于训练语料库的建立语言模型和转移矩阵(又称为 error Model，channel Model)得到，具体例子查看链接
 
 ### Real—word 拼写纠错
 
-    通常解决办法有两步：
-    - For each word in sentence
-        - Generate candicate set
-            - the word itself
-            - all single-letter edit that are English words
-            - words that are homophone
-    - Choose best candidates
-        - Noisy channel model
-        - Task-specific classifiter
+通常解决办法有两步：
+- For each word in sentence
+- Generate candicate set
+- the word itself
+- all single-letter edit that are English words
+- words that are homophone
+- Choose best candidates
+- Noisy channel model
+- Task-specific classifiter
 
 ### 应用
 
-    实际中的拼写纠错系统一般会遵守HCI(Human Computer Interface) 准则
-    - if very confident in correction
-        - Autocorrect
-    - Less confident 
-        -give the best correction
-    - Less confident 
-        - give a correction list
-    - Unconfident
-        - Just flag as an error
-    
-    根据应用场景的不同(Domain Sensitivity)，需要对语言模型进行性特别的处理
-    
-    除了字面的拼写错误，还有可能同音错误，所以有些系统将‘error model’转化为‘phonetic error model’解决拼写纠错问题
-    
-    另外键盘按键可能引起Spelling error pair，可以根据转移矩阵进行加权
-    
-    我们还可以将拼写纠错能力转化为分类问题，通过建立语料库，抽取特征，训练分类模型，预测新实例等一系列过程解决
+实际中的拼写纠错系统一般会遵守HCI(Human Computer Interface) 准则
 
+- if very confident in correction
+    - Autocorrect
+- Less confident 
+    -give the best correction
+- Less confident 
+    - give a correction list
+- Unconfident
+    - Just flag as an error
+
+根据应用场景的不同(Domain Sensitivity)，需要对语言模型进行性特别的处理
+
+除了字面的拼写错误，还有可能同音错误，所以有些系统将‘error model’转化为‘phonetic error model’解决拼写纠错问题
+
+另外键盘按键可能引起Spelling error pair，可以根据转移矩阵进行加权
+
+我们还可以将拼写纠错能力转化为分类问题，通过建立语料库，抽取特征，训练分类模型，预测新实例等一系列过程解决
 
 #文本分类(Text Classification)
 
@@ -308,10 +309,11 @@ Precison,Recall 和F—measure是文本分类任务中最常用的评价方法
 详细方法见原文
 ### Other sentiment tasks
 实际上，一篇文档中往往提及不同的方面/属性/对象,且对于不同的属性持有不同的倾向性例如:'the food is great but the service is awful' 一般通过frequent + rules的方法抽取评价的属性，如下：
-    - find all highly frequent across reciews('fish tacos')
-    - filter by rules like 'occurs right after sentiment word','great fish tacos' means fish tacosn likely aspect.
 
-通常，我们面临一种问题：评价属性缺失，准确的讲，评价属性不在句子中，这是很常见的现象，此时就需要结合上下文环境，如来自某电影的评价属性的缺失基本上就是电影名或者演员，可以基于已知评价属性的句子训练分类器，然后对评价属性缺失的句子进行属性预测。
+- find all highly frequent across reciews('fish tacos')
 
+- filter by rules like 'occurs right after sentiment word','great fish tacos' means fish tacosn likely aspect.
+
+  通常，我们面临一种问题：评价属性缺失，准确的讲，评价属性不在句子中，这是很常见的现象，此时就需要结合上下文环境，如来自某电影的评价属性的缺失基本上就是电影名或者演员，可以基于已知评价属性的句子训练分类器，然后对评价属性缺失的句子进行属性预测。
 
 [以gensim训练词向量](http://zake7749.github.io/2016/08/28/word2vec-with-gensim/)

@@ -8,6 +8,23 @@
 - 优点
   - 轻，有效利用pandas
 
+## requests & Beautifulsoup
+
+### 常见提取元素的方法
+
+- Beautifulsoup：soup.select(" ") 配合使用 infolite插件
+- xpath：配合插件xpath使用
+- 正则表达式
+
+### request的使用
+
+- ​
+
+### bs的使用
+
+- scrapy 使用bs4：
+- selenium使用bs: Beautifulsoup(driver.page_source)
+
 ## Scrapy
 
 ### Scrapy文件目录
@@ -58,10 +75,8 @@ weibo
 
 [chrome 开发者工具](http://wiki.jikexueyuan.com/project/chrome-devtools/debugging-javascript.html)
 
-常用的插件
+chrome常见插件
 
-- infolite
-- xpath helper
 - cookie edit
 - js beautiful
 
