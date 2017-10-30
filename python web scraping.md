@@ -66,6 +66,8 @@ weibo
 - 文件进行断点调试？？找到生成该参数的具体js代码??实际中如何更好的设置断点
 - 解析js代码，并将js代码转化为python
 - [js实例](http://wenqiang-china.github.io/2016/05/11/get-ctrip-flights-info-2/)
+- any XHR   breakpoint，watch
+- 带上cookie，看看文件的参数，搜索cookie
 
 ## 验证码和图像识别
 

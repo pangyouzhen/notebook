@@ -7,8 +7,8 @@
 - 用户名@主机
 - 虚拟机下无界面  ctrl+alt+F2 有界面  ctrl+alt+F7
 - 命令三部分：命令、参数、文件
-- 历史命令搜索 history  +  ctrl+R，其他帮助可以查看man
-- 帮助文档：tldr使用前先安装(too long don't read) 比man 简单
+- 历史命令搜索 history  +  ctrl+R，使用以前命令  !num
+- [tldr python 客户端及其配置](https://github.com/tldr-pages/tldr-python-client)
 - 后台作业：&、jobs、bg、fg
 - 修改用户名密码 passwd
 - 暂停某个程序 ctrl+z
@@ -96,7 +96,7 @@
 - 文件复制 `cp` 一般加 -r参数用来复制文件夹
 - `scp` 配合公钥私钥无密码登录
 - 挂载文件 mount -t vboxsf BaiduShare /mnt/bdshare/
-- 显示文件结构 tree -L 1  显示一层
+- sudo apt-get install tree  显示文件结构 tree -L 1  显示一层
 
 #### 文件架构
 - bin：可执行的二进制文件
@@ -113,6 +113,8 @@
 - tmp：临时目录
 
 ### vim
+
+[vim插件配置](http://www.jianshu.com/p/f0513d18742a)
 
 #### 命令模式
 
@@ -272,6 +274,7 @@
 - ldd 列出file运行所需的共享库
 - ctrl+alt+T 快速调用命令窗口
 - ubuntu分屏显示 ctrl + win + 上下左右
+- [修改源文件为阿里云](http://blog.csdn.net/u011148119/article/details/50338355)
 
 ## 常见错误的解决
 

@@ -237,6 +237,14 @@ from string import Template
 
 主要作用命令行参数的设置
 
+### PyQt4
+
+安装
+
+- windows安装：windows exe安装包
+- ubuntu安装：sudo apt-get install python-qt4
+- centos安装：yum install PyQt4
+
 ## 其他
 ### python chr(), ord(), unichr() 函数
 
