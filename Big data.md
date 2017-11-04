@@ -203,18 +203,39 @@ pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时�
 - spark基于DAG进行迭代计算，RDD形成的任务成DAG
 - spark四大组件：spark streaming，spark SQL，spark Mllib，spark graphx。
 
-## spark 运行流程
+## spark 运行架构
 
 ### 基本概念
 
 - RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型
+- DAG：反映了RDD之间的依赖关系
 - Executor：是运行在工作节点（workernode）的一个进程，负责运行task
-- task：运行在Executor上的工作单元
+- Application：用户编写的Spark应用程序
+- Task：运行在Executor上的工作单元
 - Job：一个Job 包含多个RDD及作用于相应RDD上的各种操作。
 - Stage：是Job的基本调度单位，一个Job分组为多组的Task，每组Task被称为stage，没有Shuffle关系
 - 一个Application 由一个Driver和若干个Job组成，一个Job由多个Stage组成，一个Stage由多个没有Shuffle关系的Task组成
 
-### RDD运行原理
+### 架构设计
+
+- Spark的运行架构包括集群资源管理器（Cluster Manager）、运行作业任务的工作节点（Worker Node）、每个应用的任务控制节点（Driver）和每个工作节点上负责具体任务的执行进程
+- 资源管理器可以自带或Mesos或者Yarn
+
+与hadoop mapreduce计算框架相比，spark所采用的Executor有两个优点：
+
+- 一是利用多线程来执行具体的任务，减少任务的启动开销
+- 而是Executor中有一个BlockManager存储模块，会将内存和磁盘共同作为存储设备，有效减少IO开销
+
+### spark运行基本流程
+
+1. 由Driver创建一个Sparkcontext，并提交到资源管理器上
+2. 资源管理器为Executor分配资源，并启动Executor进程
+3. SparkContext根据RDD的依赖关系构建DAG图，DAG图提交给DAGscheduler解析成Stage，然后把一个个的TaskSet提交给底层调度器TaskScheduler处理，Executor向SparkContext申请Task，Task Scheduler将Task发放给Executor运行，并提供应用程序代码
+4. Task在Executor上运行，将执行结果反馈给TaskScheduler，然后反馈给DAGScheduler，运行完毕后写入数据并释放所有资源
+
+
+
+### spark运行原理
 
 - 窄依赖：是一个父节点对应一个子节点或者多个父节点对应一个子节点
 - 宽依赖：是一个父节点对应多个子节点或者多个父节点对应一个子节点
