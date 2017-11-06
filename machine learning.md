@@ -93,6 +93,14 @@ AUC与ROC的：解决样本不均衡的问题，AUC与ROC的内容
 
 # 逻辑回归与最大熵模型
 
+logistic 回归模型：
+
+1. $$ z= W^{T}+b$$
+2. $$ \hat{y} = \sigma(z)$$
+3. sigmod函数 $$ \sigma(x) = \frac{1}{1+\exp(-x)}$$
+
+
+
 # 支持向量机(SVM)
 
 ### SVM 核函数
