@@ -318,12 +318,18 @@ mongo普通查询
 - hive -> oracle
         ./sqoop export --conenct jdbc:oracle:thin:@..:端口 --username scoot --password tiger --table emp [--columns '..']
 
-# git使用
 
-- git add .
-- git commit -m "自己的标注"
-- git push origin master
-- git log
+
+# git的使用
+
+- git --help
+- 自己使用：
+  - git add . 
+  - git  commit -m ''
+  - git push origin master
+- git log, git status
+
+
 
 # chrome & google 搜索技巧
 
