@@ -2,17 +2,18 @@
 
 ## 规范
 
-### PEP8 规范
-
-
-#### 常见错误及更正
+### 规范
 
 - 装饰器中使用functools 中的@wraps(func)
 - 类的命名：驼峰命名法
 - 函数的命名：
+- 函数一定要添加注释。这一部分使用详见pycahrm
+- TODO的使用，这一块在pycharm很好用
 - 不做没有意义的命名，尤其是t，x，y，就像文件的命名一样
 - python正则表达式使用 r' '  不需要在用\进行转义了，首先用字符串提供的常见函数看能否进行解决，然后再考虑用正则表达式
 - 使用super初始化父类
+- 头部文件加入编码字符
+- 构建项目时尽量使用虚拟环境，virtualenv
 
 ###  VCS
 
@@ -308,11 +309,13 @@ pandas
     - ctrl+D 可以和本地文件夹进行批量比较
 - virtualenv 环境
     - 安装virtualenv：pip install virtualenv
-    - 然后选定合适位置创建文件夹（linux下使用mkdir创建），并切换到该目录文件下
+    - 然后选定合适位置创建文件夹: mkdir myproject , cd project
     - 创建虚拟环境命名为venv：virtualenv  --no-site-packages venv
-    - source venv/bin/active 并正常安装各种包
+    - source venv/bin/active 并使用pip install 这里不应该使用sudo的命令
     - 退出虚拟环境：deactivate
     - 在解释器中进行添加
+- speech_recognition中的安装pyaudio中portaudio错误
+    - https://stackoverflow.com/questions/5921947/pyaudio-installation-error-command-gcc-failed-with-exit-status-1
 
 ### 代码重构 ？？
 
