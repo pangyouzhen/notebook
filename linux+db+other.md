@@ -13,7 +13,6 @@
 - 修改用户名密码 passwd
 - 暂停某个程序 ctrl+z
 - alias 别名
-- ls python*
 - date 查看当前日期
 - sudo date -s 修改当前时间
 - hwclock 硬件时间
@@ -194,8 +193,14 @@
 - 基于列处理文本工具cut 常用来处理csv文件
 - 文本统计 wc
 - 文本排序 sort
+- awk与sed工具怎样使用？
 
-## linux 通配符
+## 通配符和regex
+
+通配符和正则表达式的区别：
+
+- 通配符是shell内置的，常用于locate与find命令中，正则表达式是程序支持的，例如grep, sed, awk
+- 通配符规则简单只有* , [ ], ? 
 
 ### 通配符[wildcard]
 
@@ -204,11 +209,6 @@
 | \*   | 匹配0个或多个字符 | a\*b  |
 | ?    | 匹配任意一个字符  | a?b   |
 | []   | 匹配里面的任意字符 | [a-9] |
-
-注：通配符与正则表达式不同之处
-- 用途不同：通配符是匹配文件名，正则表达式匹配文件内容
-- 元字符不同，通配符只有三个\* , [] , ? 正则表达式有很多
-
 
 ### 元字符(meta)
 
@@ -231,20 +231,13 @@
 
 ## linux 软件管理工具
 
-### rpm软件(ubuntu  dpkg)
+注意，centos使用yum工具
 
+### 源代码编译使用
 
-- 源代码编译使用
-    1. ./configure 检查环境
-    2. make 编译，生成可执行软件
-    3. make install 安装
-- rpm包
-    - 命名规范：不同平台 
-    - 安装 rpm -i 软件
-    - 卸载 rpm -e 软件
-    - 升级 rpm -U 软件
-    - http ftp 安装  rpm -ivh 链接
-    - rpm 验证: rpm -K 软件
+1. ./configure 检查环境
+2. make 编译，生成可执行软件
+3. make install 安装
 
 ### ubuntu dpkg 软件安装
 
@@ -254,14 +247,6 @@
     - 这里的仿照bashrc文件进行修改
     - source ~/.bashrc 修改环境变量生效
     - echo $CHROME_HOME 和 直接键入chrome  检查
-
-### yum 软件管理(ubuntu apt-get)
-
-- man yum 
-- yum 仓库配置 
-- yum install/remove/update
-- yum search 
-- yum list
 
 ## 其他
 
@@ -275,6 +260,7 @@
 - ctrl+alt+T 快速调用命令窗口
 - ubuntu分屏显示 ctrl + win + 上下左右
 - [修改源文件为阿里云](http://blog.csdn.net/u011148119/article/details/50338355)
+- [ubuntu扁平化](https://github.com/anmoljagetia/Flatabulous)
 
 ## 常见错误的解决
 
@@ -356,7 +342,7 @@ vimium应该是基于 vim的思想进行编写的，所以许多命令是通用�
 - H,L  前进 后退
 - h，l向左向右，这个在分屏时有用
 - /进行查找时，\I 可以按照大小写进行查找，\r  可以按照正则表达式进行查找
-- 和vim类似 3K 向前切换3个tab 数字的用法,尽量不使用ctrl+F 习惯于使用/ 进行查找
+- 和vim类似 3K 向前切换3个tab 数字的用法,使用ctrl+F
 - 使用o在当前页输入，O相当于 ctrl+T
 - chrome F10 进入chrome 菜单
 
