@@ -61,7 +61,7 @@
 - 查看ip: ifconfig
 - 文件下载命令: wget 命令
 - DNS解析: host, dig
-- 路由表：ip  route
+- 路由表：iproute
 - 追踪地址：traceroute
 - 网络质量测试：mtr
 
@@ -200,7 +200,7 @@
 通配符和正则表达式的区别：
 
 - 通配符是shell内置的，常用于locate与find命令中，正则表达式是程序支持的，例如grep, sed, awk
-- 通配符规则简单只有* , [ ], ? 
+- 通配符规则简单只有* , [ ], ? ，而regex更广泛
 
 ### 通配符[wildcard]
 
