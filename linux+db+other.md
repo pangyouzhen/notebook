@@ -47,12 +47,13 @@
 - 经常使用的是：sudo tar -zxvf ./apache-hive-1.2.1-bin.tar.gz -C /usr/local
 
 #### 查找
-- locate kw 进行快速查找，一般使用前使用sudo updatedb
+- locate kw 进行快速查找，一般使用前使用sudo updatedb 
 - find 查找位置 查找参数 /根目录 .当前目录
     - find / -name linuxcast
     - find / -type d 按照类型进行查找，d这里代表目录
 - whereis 一般用来查找二进制文件
 - which  一般用来搜寻文件安装位置
+- locate 与find经常配合xargs使用
 
 
 #### 网络
@@ -268,7 +269,11 @@
 
 ## linux启动
 
-- BIOS-> MBR-> GRUB-> 加载内核-> 执行init-> runlevel
+- BIOS-> MBR-> GRUB-> 加载内核-> 执行init-> runleve
+
+# 软件
+
+- 使用wps的三个命令：wps, et, wpp
 
 # mongodb
 
