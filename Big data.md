@@ -1,94 +1,63 @@
 # 概述
 
+## 什么是大数据
+
+4V:  volume （量大）；Velocity（速度，比如storm）；variety （多样性，比如hbase中的非结构化数据）；value（高价值，数据是用来做决策的）
+
 ## 大数据的应用场景
 
-### 典型案例：迈克尔.舍恩  《大数据时代》
+- 典型案例：迈克尔.舍恩  《大数据时代》
+  - google的流感趋势预测
+  - 机票价格的调整
+- 金融方面：
+  - 银行：利用银行卡刷卡记录等进行寻找高价值的用户
+  - 证券：自动化交易
+  - 保险
+- 电信
+  - 日志分析
+- 建筑
+  - 通过传感器来进行桥梁的质量测试
+- 医疗：
+  - 海量的病例和医疗报告：例如IBM的waston
 
-- google的流感趋势预测
-- 机票价格的调整
-
-### 金融方面：
-
-- 银行：利用银行卡刷卡记录等进行寻找高价值的用户
-- 证券：自动化交易
-- 保险：
-
-### 电信
-
-- 日志分析
-
-### 建筑
-
-通过传感器来进行桥梁的质量测试
-
-### 医疗：
-
-海量的病例和医疗报告：例如IBM的waston
 
 - 核心：分布式存储（HDFS）和分布式处理（Mapreduce）
-- 和云计算的关系：Iaas  (infrastructure) , Paas (platform) , Saas (software), 云计算的关键技术, 虚拟化，分布式存储，分布式计算， 多租户
+- 和云计算的关系：Iaas  (infrastructure) , Paas (platform) , Saas (software),
 
 # Hadoop
 
-- hadoop 的节点主要有
-  - namenode，负责协调集群中数据存储，（这些数据存储到哪些地方了，去哪地方找，所以是协调）
-  - datanode，存储被切分的数据块，（存储具体的数据）
-  - jobtracker，协调数据计算任务
-  - tasktracker，负责执行jobtracker指派的任务
-  - secondarynamenode，帮助namenode收集文件系统运行的状态信息
-- hadoop 企业安装
-  - 企业安装因为服务器比较多，所以一般使用自动化部署工具，现在比较流行的是docker
+## hadoop 集群节点
 
-# HDFS
+- namenode，负责协调集群中数据存储，（这些数据存储到哪些地方了，去哪地方找，所以是协调,包含两个核心部分)
+  - FsImage: 维护文件系统树和文件树中的所有文件和文件夹的metadata
+  - EditLog:记录了所有针对文件的创建删除重命名等操作
+- datanode，存储被切分的数据块，（存储具体的数据）
+- jobtracker，协调数据计算任务
+- tasktracker，负责执行jobtracker指派的任务
+- secondarynamenode，帮助namenode收集文件系统运行的状态信息
 
-## hdfs
+## hadoop 企业安装
 
-- 块。每一个块为64M
-- namenode 存储元数据，将原数据保存在内存中，保存文件，block，datanode之间的映射关系
-- datanode 存储文件内容，文件内容保存在磁盘，维护了block id 到datanode本地文件的映射关系
+- 企业安装因为服务器比较多，所以一般使用自动化部署工具，现在比较流行的是docker
 
-### 名称节点和数据节点
+## hadoop的核心：
 
-在HDFS中，名称节点（Namenode）负责管理命名空间（namespace）保存了两个核心的数据结构
-- FsImage: 维护文件系统树和文件树中的所有文件和文件夹的metadata
-- EditLog:记录了所有针对文件的创建删除重命名等操作
+- HDFS：
+- mapreduce：
+  - map：接收一个键值对（key-value）,产生中间一组键值对，根据key的值将value传到reduce函数
+  - reduce：根据key的值将value组合成更小的值
 
-hadoop启动时将fsimage和editlog进行合并，因为fsimage比较小，所以把fsimage独立出来
-secondaryNamenode ，并解决editlog不断增大的问题
+在mapreduce中将map的结果分发到reduce中的过程就是shuffle，但是[spark中的shuffle和mapreduce的shuffle区别](http://blog.csdn.net/johnny_lee/article/details/22619585)
 
-## HDFS存储原理
-
-- 增强容错性和可用性，解决方案：多副本保存，数据冗余来解决，一般默认为3个副本
-- 数据存储：
-  - 1副本：上传文件的数据节点
-  - 2副本：与1副本不同机架的节点上
-  - 3副本：与1副本相同机架的不同节点
-
-## HDFS常用命令
-
-- 常用命令是hadoop  fs
 # Hbase
 
-## 概述
+## habse与传统数据库的对比
 
-### habse与传统数据库的对比
-
-- 数据类型。关系型数据库 关系模型，hbase   未经解释的字符串，没有数据类型
 - 数据操作：hbase 只提供了插入，删除，查询的操作
-- 列存储和行存储。
-- 索引，关系型数据库多个索引，habse  只有一个索引 行键
-- 数据维护
-- 可伸缩性
 
-## 访问接口
+## hbase的特点
 
-## 数据模型
-
-### 数据模型概述
-
-- hbase需要根据行键，列族，列限定符，时间戳来确定一个单元格
-
-概念视图和物理视图
+- hbase的四维：行键，列族，列限定符，时间戳来确定一个单元格，其中行键（row key）是hbase的索引，hbase只支持一级索引，二级索引借助其他工具，hbase是存储未经解释的字符串，没有数据类型
 
 # Nosql
 
@@ -110,33 +79,24 @@ secondaryNamenode ，并解决editlog不断增大的问题
 
 - 优点：查找速度快，可扩展性强，容易进行分布式扩展，复杂度低
 
-### 不同类型数据库的比较
-
-## CAP
-
-- C 一致性
-- A可用性
-- P分析容忍性
-- MYSQL等关系型数据CA，NOSQL一般强调CP
-
 ## mongodb的使用
 
 - 创建：不用创建表
 - 插入：db.coll.insert({'a':1})
 
-# 云数据库
-
-# Mapreduce
-
 # Hive
 
 ## 概述
 
-数据仓库：用于支持管理和决策
-数据集市：
-pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时时数据分析
+pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，一般喜欢做离线分析，hbase时时数据分析
 
 ## hive
+
+hive本质是hadoop的数据仓库，所有的数据存在hdfs上，底层可以用mysql，db2等数据库进行存储，hive的查询操作转化成mapreduce作业。
+
+数据仓库更关注于OLAP，常用来做数据的决策，所以更关注查询的效率，而数据库更偏向业务，比如银行业务的数据用的数据库，但是你要进行用户的画像分析，就要用到数据仓库了
+
+hive是不建立索引的，查询时是暴力扫描所有的数据
 
 ## hive 常见命令
 
@@ -160,11 +120,7 @@ pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时�
   - 通配符：-  匹配一个字符，%匹配任意长度的字符，[] 括号里指定范围的一个字符，[^] 匹配不在括号里一个字符
 - 聚合函数：
 
-  - SUM()函数
-  - AVG()函数
-  - MAX()函数
-  - MIN()函数
-  - COUNT(*)函数
+  - SUM()； AVG()；MAX()；MIN()；COUNT(*)
 - 时间日期：
   - select from_unixtime(1323308,'')????
   - year，month， day
@@ -199,15 +155,15 @@ pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时�
 
 ## 简介
 
-- spark是将结果放在内存中,hadoop使用磁盘
-- spark基于DAG进行迭代计算，RDD形成的任务成DAG
+- hadoop的缺点：磁盘开销大; 其他的任务运行完之后才能运行其他的任务
+- spark的优点：内存计算； 基于DAG调度而成
 - spark四大组件：spark streaming，spark SQL，spark Mllib，spark graphx。
 
 ## spark 运行架构
 
 ### 基本概念
 
-- RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型
+- RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型，RDD简单讲就是一种数据结构，这种数据结构类似于数组，与普通数组的区别是RDD中的数据是分区进行存储的，RDD支持两种操作transformation：从现有的数据集中创建一个新的数据集和action，在数据集上计算后产生一个值返回到驱动程序
 - DAG：反映了RDD之间的依赖关系
 - Executor：是运行在工作节点（workernode）的一个进程，负责运行task
 - Application：用户编写的Spark应用程序
@@ -235,13 +191,7 @@ pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，hbase时�
 
 
 
-### spark运行原理
+### RDD运行原理
 
 - 窄依赖：是一个父节点对应一个子节点或者多个父节点对应一个子节点
 - 宽依赖：是一个父节点对应多个子节点或者多个父节点对应一个子节点
-
-# 流计算
-
-
-
-# 图计算
