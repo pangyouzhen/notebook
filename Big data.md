@@ -47,7 +47,9 @@
   - map：接收一个键值对（key-value）,产生中间一组键值对，根据key的值将value传到reduce函数
   - reduce：根据key的值将value组合成更小的值
 
-在mapreduce中将map的结果分发到reduce中的过程就是shuffle，但是[spark中的shuffle和mapreduce的shuffle区别](http://blog.csdn.net/johnny_lee/article/details/22619585)
+在mapreduce中将map的结果分发到reduce中的过程就是shuffle，[spark中的shuffle和mapreduce的shuffle区别](http://blog.csdn.net/johnny_lee/article/details/22619585)
+
+使用python实现wordcount的mapreduce过程[http://www.cnblogs.com/kaituorensheng/p/3826114.html]
 
 # Hbase
 
@@ -92,7 +94,7 @@ pig，hive，hbase：pig实现数据的ETL，hive常用来批处理，一般喜�
 
 ## hive
 
-hive本质是hadoop的数据仓库，所有的数据存在hdfs上，底层可以用mysql，db2等数据库进行存储，hive的查询操作转化成mapreduce作业。
+hive本质是hadoop的数据仓库，所有的数据存在hdfs上，底层可以用mysql，db2等数据库进行存储，hive的查询操作转化成mapreduce作业。hive后期增加了对非结构化数据的支持，比如json格式的数据，但是实际应用中一般不会用hiva存储非结构化数据
 
 数据仓库更关注于OLAP，常用来做数据的决策，所以更关注查询的效率，而数据库更偏向业务，比如银行业务的数据用的数据库，但是你要进行用户的画像分析，就要用到数据仓库了
 
@@ -163,8 +165,8 @@ hive是不建立索引的，查询时是暴力扫描所有的数据
 
 ### 基本概念
 
-- RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型，RDD简单讲就是一种数据结构，这种数据结构类似于数组，与普通数组的区别是RDD中的数据是分区进行存储的，RDD支持两种操作transformation：从现有的数据集中创建一个新的数据集和action，在数据集上计算后产生一个值返回到驱动程序
-- DAG：反映了RDD之间的依赖关系
+- RDD: resillient distributed dataset(弹性分布式数据集)。是分布式内存的一个抽象概念，提供了一种高度受限的共享内存模型，RDD简单讲就是一种数据结构，这种数据结构类似于数组，与普通数组的区别是RDD中的数据是分区进行存储的，RDD支持两种操作transformation：（常见的transformation有哪些）从现有的数据集中创建一个新的数据集和action（常见的action操作有哪些），在数据集上计算后产生一个值返回到驱动程序
+- DAG：有向无环图，反映了RDD之间的依赖关系
 - Executor：是运行在工作节点（workernode）的一个进程，负责运行task
 - Application：用户编写的Spark应用程序
 - Task：运行在Executor上的工作单元
@@ -184,10 +186,16 @@ hive是不建立索引的，查询时是暴力扫描所有的数据
 
 ### spark运行基本流程
 
-1. 由Driver创建一个Sparkcontext，并提交到资源管理器上
-2. 资源管理器为Executor分配资源，并启动Executor进程
-3. SparkContext根据RDD的依赖关系构建DAG图，DAG图提交给DAGscheduler解析成Stage，然后把一个个的TaskSet提交给底层调度器TaskScheduler处理，Executor向SparkContext申请Task，Task Scheduler将Task发放给Executor运行，并提供应用程序代码
-4. Task在Executor上运行，将执行结果反馈给TaskScheduler，然后反馈给DAGScheduler，运行完毕后写入数据并释放所有资源
+spark运行中参与对象有Cluster manager，sparkcontext，executor
+
+1. sparkcontext 首先向Clustermanager注册并申请资源
+2. Clustermanager 向executor分配资源
+3. executor向sparkcontext获取task
+   1. 先初始化sparkcontext创建DAG Scheduler，task Scheduler
+   2. 根据action生成job，并在job内部构建DAG
+   3. DAG 根据DAG构建成stage
+   4. stage转化为task
+4. task在executor执行，执行进行注销
 
 
 
