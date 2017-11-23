@@ -46,10 +46,15 @@ Error = bias + variance + noise
 ![混淆矩阵](./image/confusion matrix.jpg)
 
 精确率（precision）：TP/(FP+TP), 预测为坏人的情况中，预测正确的（实际为坏人）的人的占比 
+
 召回率（recall）：TP/(TP+FN), 实际为坏人的情况中，预测正确的（预测为坏人）的人的占比
+
 F1值：准确率与召回率的调和均值
-ROC曲线：ROC是多个混淆矩阵的组合结果。首先一点我们不定好阀值，而是将模型的预测结果从高到低进行排序，将每个概率值依次作为阀值，那么就有多个的混淆矩阵。对于每个混淆矩阵，计算TPR（True positive rate）和FPR(False positive rate), TPR = TP/(TP+FN)=Recall, 也就是召回率，FPR=FP/(FP+TN), 我们以FPR为x轴，以TPR为y轴，就得到了ROC曲线
+
+ROC曲线：ROC是多个混淆矩阵的组合结果。首先一点我们不定好**阀值**，而是将模型的预测结果从高到低进行排序，将每个概率值依次作为阀值，那么就有多个的混淆矩阵。对于每个混淆矩阵，计算TPR（True positive rate）和FPR(False positive rate), TPR = TP/(TP+FN)=Recall, 也就是召回率，FPR=FP/(FP+TN), 我们以FPR为x轴，以TPR为y轴，就得到了ROC曲线
+
 AUC曲线：（area under curve）的值为ROC曲线下面的面积，AUC的值越高， 模型的区分能力越好
+
 Gini系数：Gini系数与AUC所表示的意义相同，只是计算方式不同，GINI系数（经济学）是指ROC曲线与中线（上图红线）围成的面积和中线（上图红线）之上的面积（0.5）的比例
 
 ## 标注问题
@@ -57,8 +62,6 @@ Gini系数：Gini系数与AUC所表示的意义相同，只是计算方式不同
 标注问题常用的统计方法是：HMM，CRF
 
 ## 回归问题
-# KNN
-
 # 随机森林
 
 因为单个决策树容易出现过拟合的现象，所以就将这些树合起来（bagging思想）构成了随机森林
@@ -79,17 +82,20 @@ boosting：根据错误率进行取样，对每次失败的案例赋予较大的
 ## 优缺点：
 
 优点：不容易出现过拟合(这里可能问why)，可以得到变量的重要性排序（怎样进行排序），容易进行并行化（bagging的优点）
+
 缺点：在噪声比较大的数据上，可能出现过拟合的现象（改进的办法是什么）
 
 
 
-# 逻辑回归与最大熵模型
+# 逻辑回归与softmax回归
 
-logistic 回归模型：
+logistic 回归模型与softmax回归可以看成最简单的神经网络模型，没有隐藏层
 
-1. $$ z= W^{T}+b$$
+![logistic regression & softmax 回归](./image/logistic_regression_schematic.png)
+
+1. $$ z= W^{T}x+b$$
 2. $$ \hat{y} = \sigma(z)$$
-3. sigmod函数 $$ \sigma(x) = \frac{1}{1+\exp(-x)}​$$
+3. sigmod函数 $$ \sigma(x) = \frac{1}{1+\exp(-x)}$$
 
 
 # 支持向量机(SVM)
@@ -127,13 +133,14 @@ SVM的参数主要有两个，一个RBF函数的kernel的参数，一个是惩�
 
 ## 提升方法与集成方法
 
-ensemble就是把几种机器学习的算法组合在一起或者是把一种算法的不同参数组合到一起，基本分类为bagging和boosting。bagging的典型代表是随机森林, boosting的典型代表是GBDT和xgboost
+ensemble就是把几种机器学习的算法组合在一起或者是把一种算法的不同参数组合到一起，基本分类为bagging和boosting。bagging的典型代表是随机森林（将样本进行bootstap取样，每一部分进行决策树，然后组合起来）, boosting的典型代表是GBDT和xgboost
 
-## AdaBoost算法
+boosting的典型思想是对一份数据建立m个模型，每次分类将上一次分错的数据的权重提高一点再进行分类，最后将所有的模型组合起来，比如我做练习题，这个题目一部分练习题做错了，然后下次我做题的时候就把时间多分配到这部分做错的题目上，下下次我就将把时间更多的分配到两次都做错的题目上
 
-## AdaBoost算法的误差分析
+## GBDT
 
-## AdaBoost的解释
+GBDT(Gradient Boosting Decision Tree) 又叫 MART（Multiple Additive Regression Tree)，是一种迭代的决策树算法，该算法由多棵决策树组成，所有树的结论累加起来做最终答案。它在被提出之初就和SVM一起被认为是泛化能力较强的算法。
+GBDT中的树是回归树（不是分类树），GBDT用来做回归预测，调整后也可以用于分类。
 
 ## 提升树
 
@@ -146,6 +153,8 @@ ensemble就是把几种机器学习的算法组合在一起或者是把一种算
 # 隐马尔可夫（HMM）
 
 ## 发展过程
+
+HMM经常表示时序问题（https://en.wikipedia.org/wiki/Viterbi_algorithm）
 
 - HMM - MEMM (最大熵马尔科夫模型) - CRF
 ## Why（wiki）
@@ -236,42 +245,3 @@ y = x^2 求出y的最小值
 ## How
 
 ### python 实现
-
-# 牛顿法和拟牛顿法
-
-# 拉格朗日对偶性
-
-
-
-# 半监督学习
-
-## 主动学习
-
-
-
-#推荐算法
-## 内容的推荐算法
-## 协同过滤推荐算法
-## 基于知识的推荐算法
-
-
-
-# 常见相似度算法的原理和实现方法
-
-## 欧式距离（Eucledian Distance）
-
-## 曼哈顿距离（Manhattan Distance）
-
-## 明科夫斯基距离（Minkowsi Distance）
-
-明式距离是欧式距离的推广。
-
-$$dist(X,Y)=(\sum_{i=1}^N | x_i - y_i |^p)^\frac{1}{p}$$
-
-- p==1 ：曼哈顿距离
-- p==2 ：欧式距离
-- p==inf ：切比雪夫距离
-
-## 余弦相似度（Cosine Similarity）
-
-## Jaccard  Similarity
