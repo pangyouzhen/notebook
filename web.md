@@ -126,6 +126,11 @@ js决定了如何动态的改变HTML元素
 
 # Flask
 
+## urls和视图
+
+- debug 模式 ，app.run(debug = True)
+- ​
+
 
 
 # Djingo

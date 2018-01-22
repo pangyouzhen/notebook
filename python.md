@@ -317,9 +317,18 @@ pandas
 ### python 解释器
 
 - 远程连接 
-    - Tools -> Deployment ,注意mapping的配置
+    - Tools -> Deployment -> configure
+
+      ![pycharm远程配置](./image/pycharm_remote.png)
+
+      ​
+
+    - ![pycharm_mapping](./image/pycharm_mapping.png)
+
     - ctrl+alt+shift+x 将本地文件同步至服务器
+
     - 自定义快捷键alt+x 和服务器文件进行比较
+
     - ctrl+D 可以和本地文件夹进行批量比较
 
 ### 代码重构 ？？
