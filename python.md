@@ -203,20 +203,6 @@ with open('path.txt','rb') as f:
 
 ### re
 
-| 标点符号 | 英文名词                |
-| :--- | :------------------ |
-| .    | period or full stop |
-| ,    | comma               |
-| :    | colon               |
-| ;    | semicolon           |
-| !    | exclamation mark    |
-| ?    | question mark       |
-| \_   | underscore          |
-| ()   | parenthesis         |
-| []   | square brackets     |
-| \*   | asterisk            |
-| -    | hyphen              |
-
 ### logging
 
 | 重要概念      | 定义   | 解释                     |
@@ -249,13 +235,22 @@ from string import Template
 ## 其他
 ### python chr(), ord(), unichr() 函数
 
-###  虚拟环境 virtualenv
+###  虚拟环境的使用建议使用conda进行安装
 
-- 安装virtualenv：pip install virtualenv
-- 然后选定合适位置创建文件夹: mkdir myproject , cd project
-- 创建虚拟环境命名为venv：virtualenv  --no-site-packages venv
-- 使用虚拟环境（其实是linux的启用环境变量的命令）：source venv/bin/activate 并使用pip install 这里不应该使用sudo的命令
-- 退出虚拟环境：deactivate
+- 建议先更改conda 的源文件：
+
+- ```
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --set show_channel_urls yes
+  ```
+
+- 利用conda  config 在本地会生成.condarc的隐藏文件，win下面C:\user\用户名
+
+- conda create -n tensorflowpy python==3.6.2  就是创建了名为tensorflowpy的虚拟环境
+
+- win下activate tensorflowpy 
+
+- 在虚拟环境中可以使用conda与pip进行安装（不限于网络,whl进行安装）
 
 ### 安装
 
